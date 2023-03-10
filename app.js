@@ -1,5 +1,6 @@
 import express from "express";
 import * as dotenv from "dotenv";
+import connectDB from "./connect.js";
 
 import cors from "cors";
 
@@ -8,6 +9,12 @@ import propertyRouter from "./routes/property.routes.js";
 
 // CONFIG AND INITIALIZATION
 dotenv.config();
+
+try {
+  connectDB(process.env.MONGODB_URL);
+} catch (err) {
+  console.log(err);
+}
 
 const app = express();
 app.use(cors());
